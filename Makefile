@@ -1,0 +1,43 @@
+NAME	= push_swap
+
+INCLUDE_DIR	= includes/
+
+LIBFT_DIR	= ./libft
+LIBFT		= $(LIBFT_DIR)/libft.a
+
+SRC_DIR	= ./src
+SRC_FILES	= front_last_utils.c last_front_utils.c main.c \
+			push_swap_utils.c push_utils.c sort_algorithms.c \
+			swap_utils.c
+SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_FILES))
+
+
+TEST_DIR	= ./tests
+TEST_FILES	= main.c
+TEST_SRCS	= $(addprefix $(TEST_DIR)/,$(TEST_FILES)) $(addprefix $(SRC_DIR)/,$(filter-out main.c, $(SRC_FILES)))
+
+CC=cc
+CFLAGS=-Wall -Wextra -Werror -I$(INCLUDE_DIR)
+
+all: $(NAME)
+
+$(NAME): $(LIBFT)
+	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+
+test: $(NAME)
+	$(CC) $(CFLAGS) $(TEST_SRCS) $(SRCS) $(LIBFT) -o $(NAME) 2>&1; ./$(NAME)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+clean:
+	make -C $(LIBFT_DIR) clean
+
+fclean: clean
+	rm -rf $(NAME)
+	make -C $(LIBFT_DIR) fclean
+
+re: fclean all
+
+.SUFFIXES:
+.PHONY: all clean fclean re
