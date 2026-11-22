@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/22 18:57:47 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/22 19:31:21 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,28 @@
 
 t_list	*pop_last(t_list **list)
 {
-	
+	char	*current;
+	char	*previous;
+	char	*last;
+
+	current = *list;
+	previous = NULL;
+	if (current == NULL)
+		return (NULL);
+	if (current->next == NULL)
+	{
+		*list = NULL;
+		return (current);
+	}
+	if (!current->next == NULL)
+	{
+		previous->next = current;
+		current = current->next;
+		if (current->next == NULL)
+		{
+			
+		}
+	}
 }
 
 /* La funcion pop_first, recibe la direccion de memoria de un puntero t_list
