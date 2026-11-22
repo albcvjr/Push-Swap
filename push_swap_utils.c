@@ -6,16 +6,17 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/22 15:42:40 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/22 18:57:47 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpushswap.h"
 
-/* La funcion pop_last, recibe un puntero t_list (lista de nodos) y devuelve un
-	puntero t_list. Extrae el ultimo nodo de la lista y lo devuelve. */
+/* La funcion pop_last, recibe la direccion de memoria de un puntero
+	t_list (lista de nodos) y devuelve un puntero t_list. Extrae el ultimo
+	nodo de la lista y lo devuelve. */
 
-t_list	*pop_last(t_list *list)
+t_list	*pop_last(t_list **list)
 {
 	
 }
@@ -41,7 +42,7 @@ t_list	*pop_node(t_list **list, t_list *node)
 /* La funcion compute_disorder, recibe un puntero t_list y devuelve un
 	numero entero. Calcula el desorden de la lista recibida, recorriendo esta
 	y comprobando, mediante comparacion de nodos, la cantidad de posiciones
-	incorrectas. */
+	incorrectas. El total, son todas las comparaciones que hace entre nodos. */
 
 int	compute_disorder(t_list *list)
 {
