@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 00:12:18 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 22:30:06 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:48:19 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 */
 int		ft_strisint(char *arg)
 {
-	char to_str;
+	char *to_str;
 
 	to_str = ft_itoa(ft_atoi(arg));
 	return (ft_strncmp(to_str, arg, ft_strlen(arg) + 1) == 0);
