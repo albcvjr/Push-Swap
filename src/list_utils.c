@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/23 00:01:49 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/23 19:54:52 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 	(para poder modificar la lista original **) y un puntero t_list
 	(lista de nodos) y devuelve un puntero t_list. Borra el nodo en concreto,
 	enlaza la lista y devuelve el nodo extraido.
-	
+
 	Args:
 		t_list **list: lista original
 		t_list *node: nodo a eliminar
-		
+
 	Return: 
 		t_list: nodo eliminado
 */
@@ -52,10 +52,18 @@ t_list	*ft_pop_node(t_list **list, t_list *node)
 	return (node);
 }
 
-/* La funcion pop_last, recibe la direccion de memoria de un puntero
+/*
+	La funcion pop_last, recibe la direccion de memoria de un puntero
 	t_list (lista de nodos) y devuelve un puntero t_list (una nueva lista con
 	ese nodo). Extrae el ultimo nodo de la lista y lo devuelve, utilizando
-	pop_node y ft_lstlast, implementada en LIBFT. */
+	pop_node y ft_lstlast, implementada en LIBFT.
+
+		Args:
+		t_list **list: lista original
+
+	Return: 
+		t_list: nodo devuelto
+*/
 
 t_list	*ft_pop_last(t_list **list)
 {
@@ -64,9 +72,17 @@ t_list	*ft_pop_last(t_list **list)
 	return (pop_node(list, ft_lstlast(*list)));
 }
 
-/* La funcion pop_first, recibe la direccion de memoria de un puntero t_list
+/*
+	La funcion pop_first, recibe la direccion de memoria de un puntero t_list
 	y devuelve un puntero t_list. Extrae el primer elemento de la lista y
-	retorna ese elemento, utilizando pop_node. */
+	retorna ese elemento, utilizando pop_node.
+
+		Args:
+		t_list **list: lista original
+
+	Return: 
+		t_list: nodo devuelto
+*/
 
 t_list	*ft_pop_first(t_list **list)
 {
@@ -90,13 +106,15 @@ size_t	ft_compute_disorder(t_list *list)
 	mistakes = 0;
 	total = 0;
 	node_i = list;
+	if (list == NULL || list->next == NULL)
+    	return (0);
 	while (node_i->next)
 	{
 		node_j = node_i->next;
 		while (node_j)
 		{
 			total += 1;
-			if (node_i > node_j)
+			if (*(int *)node_i->content > *(int *)node_j->content)
 				mistakes += 1;
 			node_j = node_j->next;
 		}
