@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/22 19:31:21 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/23 00:17:28 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	compute_disorder(t_list *list)
 
 	mistakes = 0;
 	total = 0;
+	if (list == NULL)
+		return (NULL);
 	node_i = list;
 	while (node_i->next)
 	{
