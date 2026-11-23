@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/23 19:54:52 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/23 21:35:29 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_list	*ft_pop_last(t_list **list)
 {
 	if (list == NULL || *list == NULL)
 		return (NULL);
-	return (pop_node(list, ft_lstlast(*list)));
+	return (ft_pop_node(list, ft_lstlast(*list)));
 }
 
 /*
@@ -88,7 +88,7 @@ t_list	*ft_pop_first(t_list **list)
 {
 	if (list == NULL || *list == NULL)
 		return (NULL);
-	return (pop_node(list, *list));
+	return (ft_pop_node(list, *list));
 }
 
 /* La funcion compute_disorder, recibe un puntero t_list (una lista) y devuelve
@@ -107,7 +107,7 @@ size_t	ft_compute_disorder(t_list *list)
 	total = 0;
 	node_i = list;
 	if (list == NULL || list->next == NULL)
-    	return (0);
+		return (0);
 	while (node_i->next)
 	{
 		node_j = node_i->next;

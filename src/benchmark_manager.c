@@ -6,15 +6,23 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 22:48:12 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 18:44:49 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:38:13 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+
+/* 
+	Descripcion:
+		La funcion ft_init_benchmark inicializa los datos del benchmark.
+	
+	Args:
+		t_benchmark *benchmark: datos del benchmark
+*/
 void	ft_init_benchmark(t_benchmark *benchmark)
 {
-	benchmark->fun = NULL;
+	benchmark->sort = NULL;
 	benchmark->stack_a = NULL;
 	benchmark->stack_b = NULL;
 	benchmark->disorder = 0; 
@@ -33,59 +41,102 @@ void	ft_init_benchmark(t_benchmark *benchmark)
 	benchmark->rrr = 0;
 }
 
+/* 
+	Descripcion:
+		La funcion ft_update_benchmark actualiza flags del benchmark.
+	
+	Args:
+		t_benchmark *benchmark: datos del benchmark
+*/
 int	ft_update_benchmark(char *arg, t_benchmark *benchmark)
 {
-	if (ft_strlcmp(arg, "simple", ft_strlen("simple")) == 0)
+	void	*data;
+	void	*node;
+	
+	if (ft_strncmp(arg, "--simple", ft_strlen("--simple") + 1) == 0)
 	{
 		benchmark->strategy = "Simple";
 		benchmark->complexety = "O(n²)";
-		benchmark->fun = ft_selection_sort;		
+		benchmark->sort = ft_selection_sort;		
 	}
-	else if (ft_strlcmp(arg, "medium", ft_strlen("medium")) == 0)
+	else if (ft_strncmp(arg, "--medium", ft_strlen("--medium") + 1) == 0)
 	{
 		benchmark->strategy = "Medium";
 		benchmark->complexety = "O(n√n)";
-		benchmark->fun = ft_buket_sort;
+		benchmark->sort = ft_buket_sort;
 	}
-	else if (ft_strlcmp(arg, "complex", ft_strlen("complex")) == 0)
+	else if (ft_strncmp(arg, "--complex", ft_strlen("--complex") + 1) == 0)
 	{
 		benchmark->strategy = "Complex";
 		benchmark->complexety = "O(n log n)";
-		benchmark->fun = ft_radix_sort;
+		benchmark->sort = ft_radix_sort;
 	}
-	else if (ft_strisnum(arg))
-		ft_lstadd_front(&benchmark->stack_a, ft_lstnew(ft_atoi(arg)));
+	else if (ft_strisint(arg))
+	{
+		data = ft_create_data(ft_atoi(arg));
+		if (!data)
+		{
+			ft_clear_benchmark(benchmark);
+			return (0);
+		}
+		node = ft_lstnew(data);
+		if (!node)
+		{
+			ft_clear_data(data);
+			ft_clear_benchmark(benchmark);
+			return (0);
+		}
+		ft_lstadd_front(&(benchmark->stack_a), node);
+	}
 	else
-		return (1);
-	return (0);
-
+		return (0);
+	return (1);
 }
 
+/* 
+	Descripcion:
+		La funcion ft_calculate_benchmark sececciona la estrategia
+		si no hay flags.
+	
+	Args:
+		t_benchmark *benchmark: datos del benchmark
+*/
 void	ft_calculate_benchmark(t_benchmark *benchmark)
 {
 	benchmark->disorder = ft_compute_disorder(benchmark->stack_a);
-	if (!benchmark->strategy)
+	if (benchmark->strategy)
+		return ;
+	benchmark->strategy = "Adaptive";
+	if (benchmark->disorder < 20)
 	{
-		benchmark->strategy = "Adaptive";
-		if (benchmark->disorder < 20)
-		{
-			benchmark->complexety = "O(n²)";
-			benchmark->fun = ft_selection_sort;
-		}
-		else if (benchmark->disorder < 50)
-		{
-			benchmark->complexety = "O(n√n)";
-			benchmark->fun = ft_buket_sort;
-		}
-		else
-		{
-			benchmark->complexety = "O(n log n)";
-			benchmark->fun = ft_radix_sort;
-		}
+		benchmark->complexety = "O(n²)";
+		benchmark->sort = ft_selection_sort;
+	}
+	else if (benchmark->disorder < 50)
+	{
+		benchmark->complexety = "O(n√n)";
+		benchmark->sort = ft_buket_sort;
+	}
+	else
+	{
+		benchmark->complexety = "O(n log n)";
+		benchmark->sort = ft_radix_sort;
 	}
 }
 
-
+/* 
+	Descripcion:
+		La funcion ft_print_benchmark mprime los datos del benchmark.
+	
+	Args:
+		t_benchmark *benchmark: datos del benchmark
+*/
 void	ft_print_benchmark(t_benchmark *benchmark)
 {
+	ft_printfe("Strat: %s\n", benchmark->strategy);
+}
+
+void	ft_clear_benchmark(t_benchmark *benchmark)
+{
+	ft_lstclear(&(benchmark->stack_a), ft_clear_data);
 }

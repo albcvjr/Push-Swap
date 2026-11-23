@@ -6,9 +6,9 @@ LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 SRC_DIR	= ./src
-SRC_FILES	= front_last_utils.c last_front_utils.c main.c \
-			push_swap_utils.c push_utils.c sort_algorithms.c \
-			swap_utils.c
+SRC_FILES	= benchmark_manager.c data_utils.c front_last_utils.c \
+			ft_printfe.c last_front_utils.c list_utils.c main.c \
+			push_utils.c sort_algorithms.c str_utils.c swap_utils.c
 SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 
 
@@ -24,8 +24,8 @@ all: $(NAME)
 $(NAME): $(LIBFT)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
-test: $(NAME)
-	$(CC) $(CFLAGS) $(TEST_SRCS) $(SRCS) $(LIBFT) -o $(NAME) 2>&1; ./$(NAME)
+test:
+	$(CC) $(CFLAGS) $(TEST_SRCS) $(LIBFT) -o $(NAME) 2>&1; ./$(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

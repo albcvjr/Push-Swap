@@ -6,7 +6,7 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 19:00:37 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 18:45:15 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:18:01 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_benchmark
 {
-	void	(*fun)(t_benchmark *);
+	void	(*sort)(struct s_benchmark *);
 	t_list	*stack_a;
 	t_list	*stack_b;
 	size_t	disorder;
@@ -40,7 +40,7 @@ typedef struct s_benchmark
 t_list	*ft_pop_last(t_list **list);
 t_list	*ft_pop_first(t_list **list);
 t_list	*ft_pop_node(t_list **list, t_list *node);
-int		ft_compute_disorder(t_list *list);
+size_t	ft_compute_disorder(t_list *list);
 void	ft_sa(t_benchmark *benchmark);
 void	ft_sb(t_benchmark *benchmark);
 void	ft_ss(t_benchmark *benchmark);
@@ -59,7 +59,10 @@ int		ft_printfe(char const *format, ...);
 void	ft_init_benchmark(t_benchmark *benchmark);
 int		ft_update_benchmark(char *arg, t_benchmark *benchmark);
 void	ft_calculate_benchmark(t_benchmark *benchmark);
-int		ft_strisnum(char *arg);
+void	ft_clear_benchmark(t_benchmark *benchmark);
+int		ft_strisint(char *arg);
 void	ft_print_benchmark(t_benchmark *benchmark);
+void	ft_clear_data(void *data);
+int		*ft_create_data(int data);
 
 #endif
