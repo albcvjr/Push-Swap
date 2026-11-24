@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:56 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/24 17:41:35 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/24 20:42:49 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,12 @@
 
 void	ft_ra(t_benchmark *benchmark)
 {
-	t_list	*first;
-	t_list	*last;
-	t_list	*new_first;
+	t_list	*node;
 
-	if (benchmark == NULL || benchmark->stack_a == NULL
-		|| benchmark->stack_a->next == NULL)
-		return ;
-	first = benchmark->stack_a;
-	last = ft_lstlast(benchmark->stack_a);
-	new_first = benchmark->stack_a->next;
-	last->next = first;
-	first->next = NULL;
-	benchmark->stack_a = new_first;
+	node = ft_pop_first(&benchmark->stack_a);
+	ft_lstadd_back(&benchmark->stack_a, node);
+	ft_printf("ra\n");
+	benchmark->ra += 1;
 }
 
 /* 
@@ -49,19 +42,12 @@ void	ft_ra(t_benchmark *benchmark)
 
 void	ft_rb(t_benchmark *benchmark)
 {
-	t_list	*first;
-	t_list	*last;
-	t_list	*new_first;
+	t_list	*node;
 
-	if (benchmark == NULL || benchmark->stack_b == NULL
-		|| benchmark->stack_b->next == NULL)
-		return ;
-	first = benchmark->stack_b;
-	last = ft_lstlast(benchmark->stack_b);
-	new_first = benchmark->stack_b->next;
-	last->next = first;
-	first->next = NULL;
-	benchmark->stack_b = new_first;
+	node = ft_pop_first(&benchmark->stack_b);
+	ft_lstadd_back(&benchmark->stack_b, node);
+	ft_printf("rb\n");
+	benchmark->rb += 1;
 }
 
 /* 
@@ -75,6 +61,12 @@ void	ft_rb(t_benchmark *benchmark)
 
 void	ft_rr(t_benchmark *benchmark)
 {
-	ft_ra(benchmark);
-	ft_rb(benchmark);
+	t_list	*node;
+
+	node = ft_pop_first(&benchmark->stack_a);
+	ft_lstadd_back(&benchmark->stack_a, node);
+	node = ft_pop_first(&benchmark->stack_b);
+	ft_lstadd_back(&benchmark->stack_b, node);
+	ft_printf("rr\n");
+	benchmark->rr += 1;
 }

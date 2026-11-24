@@ -13,7 +13,8 @@ SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 
 
 TEST_DIR	= ./tests
-TEST_FILES	= main.c
+TEST_FILES	= main.c ft_compute_disorder.c ft_selection_sort.c
+TEST_RUN	= $(addprefix $(TEST_DIR)/,$(TEST_FILES))
 TEST_SRCS	= $(addprefix $(TEST_DIR)/,$(TEST_FILES)) $(addprefix $(SRC_DIR)/,$(filter-out main.c, $(SRC_FILES)))
 
 CC=cc
@@ -24,9 +25,11 @@ all: $(NAME)
 $(NAME): $(LIBFT)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
-test: $(LIBFT)
-	$(CC) $(CFLAGS) $(TEST_SRCS) $(LIBFT) -o $(NAME)
-	./$(NAME)
+tests: $(TEST_RUN)
+
+$(TEST_DIR)/%: $(LIBFT)
+	@$(CC) $(CFLAGS) $@ $(addprefix $(SRC_DIR)/,$(filter-out main.c, $(SRC_FILES))) $(LIBFT) -o $(NAME)
+	@./$(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

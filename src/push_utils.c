@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:35 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/24 17:42:09 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/24 20:25:26 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ void	ft_pa(t_benchmark *benchmark)
 {
 	t_list	*node;
 
-	if (benchmark == NULL)
-		return ;
 	node = ft_pop_first(&benchmark->stack_b);
-	if (node == NULL)
-		return ;
 	ft_lstadd_front(&benchmark->stack_a, node);
+	ft_printf("pa\n");
+	benchmark->pa += 1;
 }
 
 /*
@@ -46,10 +44,8 @@ void	ft_pb(t_benchmark *benchmark)
 {
 	t_list	*node;
 
-	if (benchmark == NULL)
-		return ;
 	node = ft_pop_first(&benchmark->stack_a);
-	if (node == NULL)
-		return ;
 	ft_lstadd_front(&benchmark->stack_b, node);
+	ft_printf("pb\n");
+	benchmark->pb += 1;
 }

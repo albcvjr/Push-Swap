@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/24 17:42:35 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/24 20:01:50 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,26 @@ size_t	ft_compute_disorder(t_list *list)
 		node_i = node_i->next;
 	}
 	return (mistakes * 10000 / total);
+}
+
+/*
+	Descripcion:
+		reduce una lista a un nodo
+	Args:
+		t_list *list: lista
+		t_list *(*f)(t_list *, t_list *): funcion reductora
+*/
+t_list	*ft_lstreduce(t_list *list, t_list *(*f)(t_list *, t_list *))
+{
+	t_list	*ret;
+	t_list	*iter;
+
+	ret = list;
+	iter = list;
+	while (iter->next)
+	{
+		ret = f(ret, iter->next);
+		iter = iter->next;
+	}
+	return (ret);
 }

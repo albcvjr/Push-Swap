@@ -6,7 +6,7 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 20:28:25 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 22:17:35 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/24 21:11:21 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,19 @@ int	main(int argc, char **argv)
 	while (i < argc)
 		if (!ft_update_benchmark(argv[i++], &benchmark))
 		{
-			ft_printfe("Error");
+			ft_clear_benchmark(&benchmark);
+			ft_printfe(ERROR_MSG);
 			return (1);
 		}
 	ft_calculate_benchmark(&benchmark);
-	benchmark.sort(&benchmark);
-	ft_print_benchmark(&benchmark);
+	if (!benchmark.sort(&benchmark))
+	{
+		ft_clear_benchmark(&benchmark);
+		ft_printfe(ERROR_MSG);
+		return (1);
+	}
+	if (benchmark.show_benchmark)
+		ft_print_benchmark(&benchmark);
 	ft_clear_benchmark(&benchmark);
 	return (0);
 }

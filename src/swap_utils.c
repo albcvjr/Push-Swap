@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:23 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/24 17:42:28 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/24 20:49:11 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ void	ft_sa(t_benchmark *benchmark)
 	t_list	*n1;
 	t_list	*n2;
 
-	if (benchmark == NULL || benchmark->stack_a == NULL
-		|| benchmark->stack_a->next == NULL)
-		return ;
-	n1 = benchmark->stack_a;
-	n2 = n1->next;
-	n1->next = n2->next;
-	n2->next = n1;
-	benchmark->stack_a = n2;
+	n1 = ft_pop_first(&benchmark->stack_a);
+	n2 = ft_pop_first(&benchmark->stack_a);
+	ft_lstadd_front(&benchmark->stack_a, n1);
+	ft_lstadd_front(&benchmark->stack_a, n2);
+	ft_printf("sa\n");
+	benchmark->sa += 1;
 }
 
 /*
@@ -50,14 +48,12 @@ void	ft_sb(t_benchmark *benchmark)
 	t_list	*n1;
 	t_list	*n2;
 
-	if (benchmark == NULL || benchmark->stack_b == NULL
-		|| benchmark->stack_b->next == NULL)
-		return ;
-	n1 = benchmark->stack_b;
-	n2 = n1->next;
-	n1->next = n2->next;
-	n2->next = n1;
-	benchmark->stack_b = n2;
+	n1 = ft_pop_first(&benchmark->stack_b);
+	n2 = ft_pop_first(&benchmark->stack_b);
+	ft_lstadd_front(&benchmark->stack_b, n1);
+	ft_lstadd_front(&benchmark->stack_b, n2);
+	ft_printf("sb\n");
+	benchmark->sa += 1;
 }
 
 /*
@@ -71,6 +67,17 @@ void	ft_sb(t_benchmark *benchmark)
 
 void	ft_ss(t_benchmark *benchmark)
 {
-	ft_sa(benchmark);
-	ft_sb(benchmark);
+	t_list	*n1;
+	t_list	*n2;
+
+	n1 = ft_pop_first(&benchmark->stack_a);
+	n2 = ft_pop_first(&benchmark->stack_a);
+	ft_lstadd_front(&benchmark->stack_a, n1);
+	ft_lstadd_front(&benchmark->stack_a, n2);
+	n1 = ft_pop_first(&benchmark->stack_b);
+	n2 = ft_pop_first(&benchmark->stack_b);
+	ft_lstadd_front(&benchmark->stack_b, n1);
+	ft_lstadd_front(&benchmark->stack_b, n2);
+	ft_printf("ss\n");
+	benchmark->ss += 1;
 }

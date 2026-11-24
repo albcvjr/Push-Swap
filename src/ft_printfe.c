@@ -6,11 +6,30 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 22:45:41 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/22 23:23:10 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/23 23:05:18 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	_number_size(size_t number)
+{
+	int	i;
+
+	i = 1;
+	while (number / 16 != 0)
+	{
+		number /= 16;
+		i++;
+	}
+	return (i);
+}
+
+static int	_ft_flag_t(size_t arg, int fd)
+{
+	ft_putsizet_map_fd(arg, "0123456789", fd);
+	return (_number_size(arg));
+}
 
 static int	_type_flag(va_list args, const char *format, int fd)
 {
@@ -30,6 +49,8 @@ static int	_type_flag(va_list args, const char *format, int fd)
 		return (ft_flag_x(va_arg(args, unsigned int), fd));
 	else if (*format == 'X')
 		return (ft_flag_xc(va_arg(args, unsigned int), fd));
+	else if (*format == 't')
+		return (_ft_flag_t(va_arg(args, size_t), fd));
 	else if (*format == '%')
 		return (ft_flag_c('%', fd));
 	else
@@ -46,6 +67,15 @@ static int	check_bounds(size_t start, char const *format, va_list args)
 	return (1);
 }
 
+/* 
+	Descripcion:
+		La funcion ft_printfe es como la funcion ft_printf pero en la
+		salida de errores.
+	
+	Args:
+		char const *format: formato del print
+		...: argumentos que le pasas
+*/
 int	ft_printfe(char const *format, ...)
 {
 	va_list		args;

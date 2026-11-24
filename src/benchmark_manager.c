@@ -6,7 +6,7 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 22:48:12 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 22:38:13 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/24 21:12:24 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_init_benchmark(t_benchmark *benchmark)
 	benchmark->stack_a = NULL;
 	benchmark->stack_b = NULL;
 	benchmark->disorder = 0; 
+	benchmark->show_benchmark = 0;
 	benchmark->strategy = NULL;
 	benchmark->complexety = NULL;
 	benchmark->sa = 0;
@@ -71,22 +72,22 @@ int	ft_update_benchmark(char *arg, t_benchmark *benchmark)
 		benchmark->complexety = "O(n log n)";
 		benchmark->sort = ft_radix_sort;
 	}
+	else if (ft_strncmp(arg, "--bench", ft_strlen("--bench") + 1) == 0)
+	{
+		benchmark->show_benchmark = 1;
+	}
 	else if (ft_strisint(arg))
 	{
 		data = ft_create_data(ft_atoi(arg));
 		if (!data)
-		{
-			ft_clear_benchmark(benchmark);
 			return (0);
-		}
 		node = ft_lstnew(data);
 		if (!node)
 		{
-			ft_clear_data(data);
-			ft_clear_benchmark(benchmark);
+			free(data);
 			return (0);
 		}
-		ft_lstadd_front(&(benchmark->stack_a), node);
+		ft_lstadd_back(&(benchmark->stack_a), node);
 	}
 	else
 		return (0);
@@ -133,10 +134,24 @@ void	ft_calculate_benchmark(t_benchmark *benchmark)
 */
 void	ft_print_benchmark(t_benchmark *benchmark)
 {
-	ft_printfe("Strat: %s\n", benchmark->strategy);
+	char decimals[3];
+	
+	decimals[0] = benchmark->disorder%10 + '0';
+	decimals[1] = benchmark->disorder/10%10 + '0';
+	decimals[2] = 0;
+	ft_printfe("[bench] disorder:    %i.%s%%\n", benchmark->disorder/100, decimals);
+	ft_printfe("[bench] strategy:    %s / %s\n", benchmark->strategy, benchmark->complexety);
+	ft_printfe("[bench] total_ops:    %t\n", 
+		benchmark->sa + benchmark->sb + benchmark->ss + benchmark->pa + benchmark->pb + 
+		benchmark->ra + benchmark->rb + benchmark->rr + benchmark->rra + benchmark->rrb + benchmark->rrr
+	);
+	ft_printfe("[bench] sa:    %t    sb:    %t    ss:    %t    pa:    %t    pb:    %t\n", 
+		benchmark->sa, benchmark->sb, benchmark->ss, benchmark->pa, benchmark->pb);
+	ft_printfe("[bench] ra:    %t    rb:    %t    rr:    %t    rra:    %t    rrb:    %t    rrr:    %t\n", 
+		benchmark->ra, benchmark->rb, benchmark->rr, benchmark->rra, benchmark->rrb, benchmark->rrr);
 }
 
 void	ft_clear_benchmark(t_benchmark *benchmark)
 {
-	ft_lstclear(&(benchmark->stack_a), ft_clear_data);
+	ft_lstclear(&(benchmark->stack_a), free);
 }
