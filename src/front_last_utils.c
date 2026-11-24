@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   front_last_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:56 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 19:00:02 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/24 13:21:22 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 	Args:
 		t_benchmark *benchmark: datos del benchmark
 */
-void	ft_ra(t_benchmark *benchmark);
+void	ft_ra(t_benchmark *benchmark)
+{
+	
+}
 
 /* 
 	Descripcion:
@@ -30,7 +33,10 @@ void	ft_ra(t_benchmark *benchmark);
 	Args:
 		t_benchmark *benchmark: datos del benchmark
 */
-void	ft_rb(t_benchmark *benchmark);
+void	ft_rb(t_benchmark *benchmark)
+{
+	
+}
 
 /* 
 	Descripcion:
@@ -40,4 +46,7 @@ void	ft_rb(t_benchmark *benchmark);
 	Args:
 		t_benchmark *benchmark: datos del benchmark
 */
-void	ft_rr(t_benchmark *benchmark);
+void	ft_rr(t_benchmark *benchmark)
+{
+	
+}
