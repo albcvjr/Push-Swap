@@ -24,8 +24,9 @@ all: $(NAME)
 $(NAME): $(LIBFT)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
-test:
-	$(CC) $(CFLAGS) $(TEST_SRCS) $(LIBFT) -o $(NAME) 2>&1; ./$(NAME)
+test: $(LIBFT)
+	$(CC) $(CFLAGS) $(TEST_SRCS) $(LIBFT) -o $(NAME)
+	./$(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
