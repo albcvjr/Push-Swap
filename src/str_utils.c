@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 00:12:18 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/23 22:48:19 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/24 17:39:02 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Descripcion:
 		La funcion ft_strisint cumprueba que una string es un numero entero 
 		positivo o negativo.
-	
+
 	Args:
 		char *arg: rl string a comprobar
 */

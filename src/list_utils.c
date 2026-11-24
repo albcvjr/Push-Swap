@@ -6,13 +6,13 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/24 13:17:28 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/24 17:42:35 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* 
+/*
 	La funcion pop_node, borra el nodo en concreto,
 	enlaza la lista y devuelve el nodo extraido.
 
@@ -23,6 +23,7 @@
 	Return: 
 		t_list: nodo eliminado
 */
+
 t_list	*ft_pop_node(t_list **list, t_list *node)
 {
 	t_list	*current;
@@ -59,6 +60,7 @@ t_list	*ft_pop_node(t_list **list, t_list *node)
 	Return: 
 		t_list: nodo devuelto
 */
+
 t_list	*ft_pop_last(t_list **list)
 {
 	if (list == NULL || *list == NULL)
@@ -76,6 +78,7 @@ t_list	*ft_pop_last(t_list **list)
 	Return: 
 		t_list: nodo devuelto
 */
+
 t_list	*ft_pop_first(t_list **list)
 {
 	if (list == NULL || *list == NULL)
@@ -89,6 +92,7 @@ t_list	*ft_pop_first(t_list **list)
 	esta y comprobando, mediante comparacion de nodos, la cantidad de posiciones
 	incorrectas. El total, son todas las comparaciones que hace entre nodos.
 */
+
 size_t	ft_compute_disorder(t_list *list)
 {
 	size_t	mistakes;
