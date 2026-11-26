@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/24 20:01:50 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/26 22:59:40 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 	Return: 
 		t_list: nodo eliminado
 */
-
 t_list	*ft_pop_node(t_list **list, t_list *node)
 {
 	t_list	*current;
@@ -60,7 +59,6 @@ t_list	*ft_pop_node(t_list **list, t_list *node)
 	Return: 
 		t_list: nodo devuelto
 */
-
 t_list	*ft_pop_last(t_list **list)
 {
 	if (list == NULL || *list == NULL)
@@ -78,7 +76,6 @@ t_list	*ft_pop_last(t_list **list)
 	Return: 
 		t_list: nodo devuelto
 */
-
 t_list	*ft_pop_first(t_list **list)
 {
 	if (list == NULL || *list == NULL)
@@ -92,13 +89,12 @@ t_list	*ft_pop_first(t_list **list)
 	esta y comprobando, mediante comparacion de nodos, la cantidad de posiciones
 	incorrectas. El total, son todas las comparaciones que hace entre nodos.
 */
-
-size_t	ft_compute_disorder(t_list *list)
+unsigned int	ft_compute_disorder(t_list *list)
 {
-	size_t	mistakes;
-	size_t	total;
-	t_list	*node_i;
-	t_list	*node_j;
+	unsigned int	mistakes;
+	unsigned int	total;
+	t_list			*node_i;
+	t_list			*node_j;
 
 	if (list == NULL || list->next == NULL)
 		return (0);
@@ -140,4 +136,26 @@ t_list	*ft_lstreduce(t_list *list, t_list *(*f)(t_list *, t_list *))
 		iter = iter->next;
 	}
 	return (ret);
+}
+
+/*
+	Descripcion:
+		Retorna 1 si el valor esta en la lista, sino, 0
+
+	Args:
+		t_list *list: lista
+		void *value: valor
+*/
+t_list	*ft_isinlst(t_list *list, void *value)
+{
+	t_list	*iter;
+
+	iter = list;
+	while (iter)
+	{
+		if (iter->content == value)
+			return (iter);
+		iter = iter->next;
+	}
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_selection_sort.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 19:01:52 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/24 19:03:54 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/26 18:04:13 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list	*new_node(int value)
 void	print_stack(t_list *stack)
 {
 	t_list	*current;
-	
+
 	current = stack;
 	while (current != NULL)
 	{
@@ -46,16 +46,16 @@ int	main(void)
 {
 	t_list	*node;
 	t_benchmark	benchmark;
-	
+
 	ft_init_benchmark(&benchmark);
 	node = new_node(42);
 	ft_lstadd_back(&benchmark.stack_a, node);
 	ft_printf("añadido 1\n");
-	
+
 	node = new_node(43);
 	ft_lstadd_back(&benchmark.stack_a, node);
 	ft_printf("añadido 2\n");
-	
+
 	node = new_node(44);
 	ft_lstadd_back(&benchmark.stack_a, node);
 	ft_printf("añadido 3\n");
