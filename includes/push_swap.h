@@ -6,7 +6,7 @@
 /*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 19:00:37 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/27 00:09:44 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 01:55:02 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_benchmark
 {
-	int	(*sort)(struct s_benchmark *);
+	int				(*sort)(struct s_benchmark *);
 	t_list			*stack_a;
 	t_list			*stack_b;
 	t_list			*index_a;
@@ -47,7 +47,8 @@ typedef struct s_benchmark
 t_list			*ft_pop_last(t_list **list);
 t_list			*ft_pop_first(t_list **list);
 t_list			*ft_pop_node(t_list **list, t_list *node);
-t_list			*ft_lstreduce(t_list *list, t_list *(*f)(t_list *node1, t_list *node2));
+t_list			*ft_lstreduce(t_list *list, t_list *(*f)
+					(t_list *node1, t_list *node2));
 unsigned int	ft_compute_disorder(t_list *list);
 void			ft_sa(t_benchmark *benchmark);
 void			ft_sb(t_benchmark *benchmark);
