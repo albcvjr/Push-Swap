@@ -6,7 +6,7 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 22:48:12 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/26 19:51:56 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/27 22:58:39 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_update_benchmark(char *arg, t_benchmark *benchmark)
 	{
 		benchmark->strategy = "Simple";
 		benchmark->complexety = "O(n²)";
-		benchmark->sort = ft_selection_sort;		
+		benchmark->sort = ft_selection_sort;
 	}
 	else if (ft_strncmp(arg, "--medium", ft_strlen("--medium") + 1) == 0)
 	{
@@ -89,16 +89,17 @@ int	ft_update_benchmark(char *arg, t_benchmark *benchmark)
 */
 void	ft_calculate_benchmark(t_benchmark *benchmark)
 {
-	benchmark->disorder = ft_compute_disorder(benchmark->stack_a);
+	ft_update_indexes(benchmark);
+	benchmark->disorder = ft_compute_disorder(benchmark->index_a);
 	if (benchmark->strategy)
 		return ;
 	benchmark->strategy = "Adaptive";
-	if (benchmark->disorder < 20)
+	if (benchmark->disorder < 2000)
 	{
 		benchmark->complexety = "O(n²)";
 		benchmark->sort = ft_selection_sort;
 	}
-	else if (benchmark->disorder < 50)
+	else if (benchmark->disorder < 5000)
 	{
 		benchmark->complexety = "O(n√n)";
 		benchmark->sort = ft_chunk_sort;
@@ -108,7 +109,6 @@ void	ft_calculate_benchmark(t_benchmark *benchmark)
 		benchmark->complexety = "O(n log n)";
 		benchmark->sort = ft_radix_sort;
 	}
-	ft_update_indexes(benchmark);
 }
 
 /*
@@ -125,19 +125,19 @@ void	ft_print_benchmark(t_benchmark *benchmark)
 	decimals[0] = benchmark->disorder % 10 + '0';
 	decimals[1] = benchmark->disorder / 10 % 10 + '0';
 	decimals[2] = 0;
-	ft_printfe("[bench] disorder:    %i.%s%%\n", benchmark->disorder/100,
+	ft_printfe("[bench] disorder:    %i.%s%%\n", benchmark->disorder / 100,
 		decimals);
 	ft_printfe("[bench] strategy:    %s / %s\n", benchmark->strategy,
 		benchmark->complexety);
-	ft_printfe("[bench] total_ops:    %u\n", benchmark->sa + benchmark->sb +
-		benchmark->ss + benchmark->pa + benchmark->pb + benchmark->ra +
-		benchmark->rb + benchmark->rr + benchmark->rra + benchmark->rrb +
-		benchmark->rrr);
+	ft_printfe("[bench] total_ops:    %u\n", benchmark->sa + benchmark->sb \
+		+ benchmark->ss + benchmark->pa + benchmark->pb + benchmark->ra \
+		+ benchmark->rb + benchmark->rr + benchmark->rra + benchmark->rrb \
+		+ benchmark->rrr);
 	ft_printfe("[bench] sa:    %u    sb:    %u    ss:    %u    pa:    %u    \
-		pb:    %u\n", benchmark->sa, benchmark->sb, benchmark->ss, 
+		pb:    %u\n", benchmark->sa, benchmark->sb, benchmark->ss,
 		benchmark->pa, benchmark->pb);
 	ft_printfe("[bench] ra:    %u    rb:    %u    rr:    %u    rra:    %u    \
-		rrb:    %u    rrr:    %u\n", benchmark->ra, benchmark->rb, 
+		rrb:    %u    rrr:    %u\n", benchmark->ra, benchmark->rb,
 		benchmark->rr, benchmark->rra, benchmark->rrb, benchmark->rrr);
 }
 
@@ -145,4 +145,6 @@ void	ft_clear_benchmark(t_benchmark *benchmark)
 {
 	ft_lstclear(&(benchmark->stack_a), free);
 	ft_lstclear(&(benchmark->index_a), free);
+	ft_lstclear(&(benchmark->stack_b), free);
+	ft_lstclear(&(benchmark->index_b), free);
 }

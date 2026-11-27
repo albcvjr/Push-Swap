@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 23:36:05 by acuevas           #+#    #+#             */
-/*   Updated: 2026/11/26 22:59:40 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 20:42:24 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,39 +84,6 @@ t_list	*ft_pop_first(t_list **list)
 }
 
 /*
-	La funcion compute_disorder, recibe un puntero t_list (una lista) y devuelve
-	un numero entero. Calcula el desorden de la lista recibida, recorriendo
-	esta y comprobando, mediante comparacion de nodos, la cantidad de posiciones
-	incorrectas. El total, son todas las comparaciones que hace entre nodos.
-*/
-unsigned int	ft_compute_disorder(t_list *list)
-{
-	unsigned int	mistakes;
-	unsigned int	total;
-	t_list			*node_i;
-	t_list			*node_j;
-
-	if (list == NULL || list->next == NULL)
-		return (0);
-	mistakes = 0;
-	total = 0;
-	node_i = list;
-	while (node_i->next)
-	{
-		node_j = node_i->next;
-		while (node_j)
-		{
-			total += 1;
-			if (*(int *)node_i->content > *(int *)node_j->content)
-				mistakes += 1;
-			node_j = node_j->next;
-		}
-		node_i = node_i->next;
-	}
-	return (mistakes * 10000 / total);
-}
-
-/*
 	Descripcion:
 		reduce una lista a un nodo
 	Args:
@@ -128,11 +95,11 @@ t_list	*ft_lstreduce(t_list *list, t_list *(*f)(t_list *, t_list *))
 	t_list	*ret;
 	t_list	*iter;
 
-	ret = list;
+	ret = NULL;
 	iter = list;
-	while (iter->next)
+	while (iter)
 	{
-		ret = f(ret, iter->next);
+		ret = f(ret, iter);
 		iter = iter->next;
 	}
 	return (ret);

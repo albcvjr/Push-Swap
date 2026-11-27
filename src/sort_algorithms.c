@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_algorithms.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:46:40 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/27 00:10:31 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 21:58:39 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,92 +14,49 @@
 
 /*
 	Descripcion:
-		La funcion ft_selection_sort ordena los datos de el benchmark->stack_a
-		en benchmark->stack_a usando benchmark->stack_b como apoyo,
+		La funcion ft_selection_sort ordena los datos de el benchmark->index_a
+		en benchmark->index_a usando benchmark->index_b como apoyo,
 		tiene una complegidad de O(n * n).
 
 	Args:
 		t_benchmark *benchmark: datos del benchmark
 */
-int	ft_selection_sort(t_benchmark *benchmark)
+void	ft_selection_sort(t_benchmark *benchmark)
 {
-	t_list *min_node;
-	t_list *iter;
+	t_list	*min_node;
 
-	while (ft_lstsize(benchmark->stack_a) &&
-		ft_compute_disorder(benchmark->stack_a))
+	while (ft_lstsize(benchmark->index_a) && \
+		ft_compute_disorder(benchmark->index_a))
 	{
-		min_node = ft_lstreduce(benchmark->stack_a, ft_min);
-		iter = benchmark->stack_a;
-		while(iter != min_node)
-		{
-			iter = iter->next;
+		min_node = ft_lstreduce(benchmark->index_a, ft_min);
+		while (benchmark->index_a != min_node)
 			ft_ra(benchmark);
-		}
 		ft_pb(benchmark);
 	}
-	while (ft_lstsize(benchmark->stack_b))
+	while (ft_lstsize(benchmark->index_b))
 	{
 		ft_pa(benchmark);
 	}
-	return (1);
 }
 
-/*
-	Descripcion:
-		La funcion ft_chunk_sort ordena los datos de el benchmark->stack_a
-		en benchmark->stack_a usando benchmark->stack_b como apoyo,
-		tiene una complegidad de O(n * sqrt(n)).
-
-	Args:
-		t_benchmark *benchmark: datos del benchmark
-*/
-int	ft_chunk_sort(t_benchmark *benchmark)
+static void	_ft_bring_back(t_benchmark *benchmark)
 {
-	t_list			*chunk;
-	t_list			*iter;
-	t_list			*min_node;
+	t_list			*max;
 	unsigned int	i;
 
-	while (benchmark->stack_a)
-	{
-		chunk = NULL;
-		i = 0;
-		while (i < ft_sqrt(ft_lstsize(benchmark->stack_a)))
-		{
-			iter = benchmark->stack_a;
-			min_node = NULL;
-			while (iter)
-			{
-				if (!ft_isinlst(chunk, iter) && (!min_node || (*(int *)iter->content < *(int *)min_node->content)))
-					min_node = iter;
-				iter = iter->next;
-			}
-			ft_lstadd_back(&chunk, ft_lstnew(min_node));
-			i++;
-		}
-		while (chunk)
-		{
-			iter = ft_isinlst(chunk, benchmark->stack_a);
-			if (iter)
-			{
-				ft_pb(benchmark);
-				ft_lstdelone(ft_pop_node(&chunk, iter), NULL);
-			}
-			else
-				ft_ra(benchmark);
-		}
-	}
-	iter = ft_lstreduce(benchmark->stack_b, ft_max);
+	max = ft_lstreduce(benchmark->index_b, ft_max);
 	i = 0;
-	while (benchmark->stack_b)
+	while (benchmark->index_b)
 	{
-		if (iter == benchmark->stack_b)
+		if (max == benchmark->index_b)
 		{
 			ft_pa(benchmark);
-			iter = ft_lstreduce(benchmark->stack_b, ft_max);
-			while (i--)
+			max = ft_lstreduce(benchmark->index_b, ft_max);
+			while (i != 0)
+			{
 				ft_rrb(benchmark);
+				i--;
+			}
 		}
 		else
 		{
@@ -107,22 +64,78 @@ int	ft_chunk_sort(t_benchmark *benchmark)
 			i++;
 		}
 	}
-	return (1);
 }
 
 /*
 	Descripcion:
-		La funcion ft_radix_sort ordena los datos de el benchmark->stack_a
-		en benchmark->stack_a usando benchmark->stack_b como apoyo,
+		La funcion ft_chunk_sort ordena los datos de el benchmark->index_a
+		en benchmark->index_a usando benchmark->index_b como apoyo,
+		tiene una complegidad de O(n * sqrt(n)).
+
+	Args:
+		t_benchmark *benchmark: datos del benchmark
+*/
+void	ft_chunk_sort(t_benchmark *benchmark)
+{
+	unsigned int	sqrt;
+	unsigned int	i;
+	t_list			*end_node;
+
+	if (!ft_compute_disorder(benchmark->index_a))
+		return ;
+	sqrt = ft_sqrt(ft_lstsize(benchmark->index_a));
+	i = 0;
+	while (benchmark->index_a)
+	{
+		end_node = NULL;
+		i += sqrt;
+		while (benchmark->index_a != end_node)
+		{
+			if (*(unsigned int *)benchmark->index_a->content < i)
+				ft_pb(benchmark);
+			else
+			{
+				if (!end_node)
+					end_node = benchmark->index_a;
+				ft_ra(benchmark);
+			}
+		}
+	}
+	_ft_bring_back(benchmark);
+}
+
+/*
+	Descripcion:
+		La funcion ft_radix_sort ordena los datos de el benchmark->index_a
+		en benchmark->index_a usando benchmark->index_b como apoyo,
 		tiene una complegidad de O(n log n).
 
 	Args:
 		t_benchmark *benchmark: datos del benchmark
 */
-int	ft_radix_sort(t_benchmark *benchmark)
+void	ft_radix_sort(t_benchmark *benchmark)
 {
-	ft_pb(benchmark);
-	ft_pb(benchmark);
-	ft_pb(benchmark);
-	return (1);
+	t_list			*end_node;
+	unsigned int	mask;
+
+	mask = 1;
+	while (ft_compute_disorder(benchmark->index_a))
+	{
+		end_node = NULL;
+		while (benchmark->index_a != end_node)
+		{
+			if (!(mask & *(unsigned int *) \
+				benchmark->index_a->content))
+				ft_pb(benchmark);
+			else
+			{
+				if (!end_node)
+					end_node = benchmark->index_a;
+				ft_ra(benchmark);
+			}
+		}
+		mask = mask << 1;
+		while (benchmark->index_b)
+			ft_pa(benchmark);
+	}
 }

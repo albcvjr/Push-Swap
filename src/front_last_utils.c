@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   front_last_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:56 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/27 00:09:52 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 21:31:02 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ void	ft_ra(t_benchmark *benchmark)
 {
 	t_list	*node;
 
-	node = ft_pop_first(&benchmark->index_a);
-	ft_lstadd_back(&benchmark->index_a, node);
-	ft_printf("ra\n");
-	benchmark->ra += 1;
+	if (ft_lstsize(benchmark->index_a) > 1)
+	{
+		node = ft_pop_first(&benchmark->index_a);
+		ft_lstadd_back(&benchmark->index_a, node);
+		ft_printf("ra\n");
+		benchmark->ra += 1;
+	}
 }
 
 /*
@@ -42,10 +45,13 @@ void	ft_rb(t_benchmark *benchmark)
 {
 	t_list	*node;
 
-	node = ft_pop_first(&benchmark->index_b);
-	ft_lstadd_back(&benchmark->index_b, node);
-	ft_printf("rb\n");
-	benchmark->rb += 1;
+	if (ft_lstsize(benchmark->index_b) > 1)
+	{
+		node = ft_pop_first(&benchmark->index_b);
+		ft_lstadd_back(&benchmark->index_b, node);
+		ft_printf("rb\n");
+		benchmark->rb += 1;
+	}
 }
 
 /*

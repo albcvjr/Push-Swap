@@ -54,7 +54,7 @@ make re     # recompila desde cero
 
 ## Estrategias y algoritmos
 
-El desorden se calcula como el porcentaje de pares que aparecen en orden inverso. Internamente se guarda en una escala de 0 a 10000, equivalente a porcentajes con dos decimales. La selección automática compara el valor con 20 (0,20) y 50 (0,50).
+El desorden se calcula como el porcentaje de pares que aparecen en orden inverso. Internamente se guarda en porcentajes con dos decimales.
 
 | Desorden | Estrategia automática | Complejidad indicada |
 |---|---|---|

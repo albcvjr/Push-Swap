@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_selection_sort.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 19:01:52 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/26 18:04:13 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 18:26:04 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 19:00:37 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/27 01:55:02 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 21:55:22 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_benchmark
 {
-	int				(*sort)(struct s_benchmark *);
+	void			(*sort)(struct s_benchmark *);
 	t_list			*stack_a;
 	t_list			*stack_b;
 	t_list			*index_a;
@@ -61,9 +61,9 @@ void			ft_rr(t_benchmark *benchmark);
 void			ft_rra(t_benchmark *benchmark);
 void			ft_rrb(t_benchmark *benchmark);
 void			ft_rrr(t_benchmark *benchmark);
-int				ft_selection_sort(t_benchmark *benchmark);
-int				ft_chunk_sort(t_benchmark *benchmark);
-int				ft_radix_sort(t_benchmark *benchmark);
+void			ft_selection_sort(t_benchmark *benchmark);
+void			ft_chunk_sort(t_benchmark *benchmark);
+void			ft_radix_sort(t_benchmark *benchmark);
 int				ft_printfe(char const *format, ...);
 void			ft_init_benchmark(t_benchmark *benchmark);
 int				ft_update_benchmark(char *arg, t_benchmark *benchmark);

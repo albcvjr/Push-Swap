@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:23 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/27 01:38:46 by acuevas          ###   ########.fr       */
+/*   Updated: 2026/11/27 21:15:41 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ void	ft_sa(t_benchmark *benchmark)
 	t_list	*n1;
 	t_list	*n2;
 
-	n1 = ft_pop_first(&benchmark->index_a);
-	n2 = ft_pop_first(&benchmark->index_a);
-	ft_lstadd_front(&benchmark->index_a, n1);
-	ft_lstadd_front(&benchmark->index_a, n2);
-	ft_printf("sa\n");
-	benchmark->sa += 1;
+	if (ft_lstsize(benchmark->index_a) > 1)
+	{
+		n1 = ft_pop_first(&benchmark->index_a);
+		n2 = ft_pop_first(&benchmark->index_a);
+		ft_lstadd_front(&benchmark->index_a, n1);
+		ft_lstadd_front(&benchmark->index_a, n2);
+		ft_printf("sa\n");
+		benchmark->sa += 1;
+	}
 }
 
 /*
@@ -46,12 +49,15 @@ void	ft_sb(t_benchmark *benchmark)
 	t_list	*n1;
 	t_list	*n2;
 
-	n1 = ft_pop_first(&benchmark->index_b);
-	n2 = ft_pop_first(&benchmark->index_b);
-	ft_lstadd_front(&benchmark->index_b, n1);
-	ft_lstadd_front(&benchmark->index_b, n2);
-	ft_printf("sb\n");
-	benchmark->sb += 1;
+	if (ft_lstsize(benchmark->index_b) > 1)
+	{
+		n1 = ft_pop_first(&benchmark->index_b);
+		n2 = ft_pop_first(&benchmark->index_b);
+		ft_lstadd_front(&benchmark->index_b, n1);
+		ft_lstadd_front(&benchmark->index_b, n2);
+		ft_printf("sb\n");
+		benchmark->sb += 1;
+	}
 }
 
 /*

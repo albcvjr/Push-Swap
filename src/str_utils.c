@@ -6,7 +6,7 @@
 /*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 00:12:18 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/26 18:50:47 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/27 20:45:21 by dbenjume         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 */
 int	ft_strisint(char *str)
 {
-	char *to_str;
-	int ret;
+	char	*to_str;
+	int		ret;
 
 	to_str = ft_itoa(ft_atoi(str));
 	if (!to_str)
