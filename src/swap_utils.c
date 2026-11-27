@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbenjume <dbenjume@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acuevas <acuevas@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:43:23 by dbenjume          #+#    #+#             */
-/*   Updated: 2026/11/26 19:40:05 by dbenjume         ###   ########.fr       */
+/*   Updated: 2026/11/27 01:38:46 by acuevas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_sb(t_benchmark *benchmark)
 	ft_lstadd_front(&benchmark->index_b, n1);
 	ft_lstadd_front(&benchmark->index_b, n2);
 	ft_printf("sb\n");
-	benchmark->sa += 1;
+	benchmark->sb += 1;
 }
 
 /*
